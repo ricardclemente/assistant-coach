@@ -18,6 +18,7 @@ export function App() {
       <ul>
         {athletes.map((athlete => (
           <AthleteCard 
+            key={athlete.id}
             id={athlete.id} 
             name={athlete.name} 
             speciality={athlete.speciality} 
