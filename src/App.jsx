@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import {AthleteCard} from './AthleteCard.jsx'
+import { AppHeader } from './AppHeader'
 
 export function App() {
   const [count, setCount] = useState(0)
@@ -12,6 +13,7 @@ export function App() {
 
   return (
     <>
+      <AppHeader />
       <div>
         <h1>ATHLETE LIST</h1>
       </div>
