@@ -1,33 +1,42 @@
 import { useState } from 'react'
 import './App.css'
-import {AthleteCard} from './AthleteCard.jsx'
+import {AthleteCard} from './components/AthleteCard.jsx'
 import { AppHeader } from './components/AppHeader'
+import { Home } from './panels/Home'
+import { menuItems } from './constants'
+import { Calendar } from './panels/Calendar'
+import { Exercices } from './panels/Exercices'
+import { Athletes } from './panels/Athletes'
+import { Profile } from './panels/Profile'
 
 export function App() {
-  const [count, setCount] = useState(0)
-  const athletes = [
-    {id: 1, name: "Usain Bolt", speciality: "100m", nationality:"JAM"},
-    {id: 2, name: "Mondo Duplantis", speciality: "Pole Vault", nationality: "SWE"},
-    {id: 3, name: "Ating Mu", speciality: "800m", nationality:"USA"}
-  ]
-
+  const [actualPanel, setActualPanel] = useState(menuItems.Home)
+  const changeActualPanel=(newPanel) =>{
+    if (newPanel===actualPanel) return
+    setActualPanel(newPanel)
+    renderPanel(newPanel)
+  }
+  const renderPanel=()=>{
+    switch(actualPanel){
+      case menuItems.Home:
+        return <Home/>;
+      case menuItems.Calendar:
+        return <Calendar/>;
+      case menuItems.Exercices:
+        return <Exercices/>;
+      case menuItems.Athletes:
+        return <Athletes/>;
+      case menuItems.Profile:
+        return <Profile/>;
+    }
+    return null;
+  }
   return (
     <>
-      <AppHeader />
-      <div>
-        <h1>ATHLETE LIST</h1>
-      </div>
-      <ul>
-        {athletes.map((athlete => (
-          <AthleteCard 
-            key={athlete.id}
-            id={athlete.id} 
-            name={athlete.name} 
-            speciality={athlete.speciality} 
-            nationality={athlete.nationality} 
-          />
-        )))}
-      </ul>
+      <AppHeader 
+        updatePanel={changeActualPanel}
+      />
+      {renderPanel()}
     </>
   )
 }

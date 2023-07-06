@@ -6,20 +6,14 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import logo from '../images/icon_navBar.png';
 import { useState } from 'react';
 import { NavItem } from './NavItem';
+import {menuItems} from '../constants.js'
 
-export function AppHeader(){
+export function AppHeader({updatePanel}){
     const [isExpanded,setIsExpanded] = useState(false)
     const toggleIsExpanded=()=>{
         setIsExpanded(!isExpanded)
     }
-    const menuItems = [
-        [1,"Home"],
-        [1,"Calendar"],
-        [1,"Exercices"],
-        [1,"Athletes"],
-        [1,"Profile"]
-    ]
-
+    
     return(
         <>
             <header className="header">
@@ -35,8 +29,8 @@ export function AppHeader(){
                         
                         <div id="navbarSupportedContent" className={isExpanded ? "navbar-collapse": "collapse navbar-collapse"}>
                             <ul className="navbar-nav ml-auto">
-                                {menuItems.map(([id,itemName])=>
-                                     <NavItem key = {id}>{itemName}</NavItem>)}    
+                                {Object.keys(menuItems).map((item)=>
+                                     <NavItem key = {item} updatePanelItem={updatePanel}>{item}</NavItem>)}    
                             </ul>
                         </div>
                     </div>
